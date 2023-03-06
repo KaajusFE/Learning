@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+    background-color: gray;
+    color: greenyellow;
+    font-size: 28px;
+}
+#top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.board{
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.card{
+    width: 125px;
+    height: 125px;
+    display: inline-block;
+    margin: 3px;
+    background-image: url("img/basic.png"); 
+    border: 4px solid rgb(197, 255, 82);
+    border-radius: 5px;
+    cursor: pointer;
+    filter: brightness(70%);
+    transition: 0.5s ease-in-out;
+}
+.card:hover{
+    border: 4px solid gold;
+    
+    filter: brightness(100%);
+}
