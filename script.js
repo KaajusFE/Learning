@@ -34,9 +34,45 @@ card11.addEventListener("click", function() { reveal(11); });
 
 var one = false;
 var counter = 0;
-
+var visible_nr;
 
 function reveal(nr){
-    var image = "url(img/"+ cards[nr] + ")";
+    var opacityValue = $("card"+nr).css("opacity");
+
+    if(opacityValue != 0){
+     var image = "url(img/"+ cards[nr] + ")";
     $("#card"+nr).css("background-image", image);
+    $("#card"+nr).addClass("cardA");
+    $("#card"+nr).removeClass("card");
+    if(one == false){
+
+
+
+        one = true;
+        visible_nr = nr;
+    }
+    else
+    {
+        if(cards[visible_nr] == cards[nr]){
+            setTimeout(function() { hidecards(nr, visible_nr) }, 750)
+            
+        }
+        else{
+            
+        }
+
+        counter++;
+        $(".score").html("You tried: " + counter + " times.");
+        one = false;
+    }
+    }
+
+
+
+
+    
 } 
+function hidecards(nr1, nr2){
+    $("#card" + nr1).css("opacity", "0");
+    $("#card" + nr2).css("opacity", "0");
+}
