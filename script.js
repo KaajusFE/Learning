@@ -35,44 +35,68 @@ card11.addEventListener("click", function() { reveal(11); });
 var one = false;
 var counter = 0;
 var visible_nr;
+var lock = false;
+var left = 6;
 
 function reveal(nr){
-    var opacityValue = $("card"+nr).css("opacity");
 
-    if(opacityValue != 0){
-     var image = "url(img/"+ cards[nr] + ")";
-    $("#card"+nr).css("background-image", image);
-    $("#card"+nr).addClass("cardA");
-    $("#card"+nr).removeClass("card");
-    if(one == false){
+    var opacityValue = $("#card" + nr).css("opacity");
 
+    if(opacityValue != 0 && lock == false){
+        lock = true;
 
+        var image = "url(img/"+ cards[nr] + ")";
 
-        one = true;
-        visible_nr = nr;
-    }
-    else
-    {
-        if(cards[visible_nr] == cards[nr]){
-            setTimeout(function() { hidecards(nr, visible_nr) }, 750)
-            
-        }
-        else{
-            
-        }
+        $("#card"+nr).css("background-image", image);
+        $("#card"+nr).addClass("cardA");
+        $("#card"+nr).removeClass("card");
+
+            if(one == false){
+
+                one = true;
+                visible_nr = nr;
+                lock= false;
+            }
+            else
+            {
+                if(cards[visible_nr] == cards[nr]){
+                    setTimeout(function() { hidecards(nr, visible_nr) }, 750);
+                    
+                }
+                else{
+
+                    setTimeout(function() { restorecards(nr, visible_nr) }, 1000);
+
+                }
 
         counter++;
         $(".score").html("You tried: " + counter + " times.");
         one = false;
     }
-    }
-
-
-
-
-    
+    }  
 } 
 function hidecards(nr1, nr2){
     $("#card" + nr1).css("opacity", "0");
     $("#card" + nr2).css("opacity", "0");
+    left--;
+
+    if(left == 0){
+
+        $(".board").html("<h1>You win!</br>Your score :"+ counter +"</br> Congratulations!</h1>");
+
+    }
+    lock = false;
+    
+
+
+}
+function restorecards(nr1, nr2){
+    $("#card"+nr1).css("background-image", "url(img/basic.png)");
+    $("#card"+nr1).addClass("card");
+    $("#card"+nr1).removeClass("cardA");
+
+    $("#card"+nr2).css("background-image", "url(img/basic.png)");
+    $("#card"+nr2).addClass("card");
+    $("#card"+nr2).removeClass("cardA");
+    lock = false;
 }
