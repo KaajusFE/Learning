@@ -36,6 +36,7 @@ var one = false;
 var counter = 0;
 var visible_nr;
 var lock = false;
+var kast = 0;
 var left = 6;
 
 function reveal(nr){
